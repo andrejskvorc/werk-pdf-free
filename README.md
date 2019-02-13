@@ -12,3 +12,6 @@ Binaries will be published on my private servers for those that just to install 
 Now I’m working od PDF Splitting part, merging is next, and viewing is last on my agenda...
 
 Hope I will create two installation types, one for Click Once Deployment and one with classic installer
+
+![Alt text](https://github.com/andrejskvorc/werk-pdf-free/blob/master/Screenshots/WerkPdfFree.PNG?raw=true "Screenshot")
+
