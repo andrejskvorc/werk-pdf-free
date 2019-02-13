@@ -15,5 +15,9 @@ namespace Werk_Pdf_Free
         private static readonly string tmpFolder = System.IO.Path.GetTempPath();
 
         public static string TempDirectory = Path.Combine(tmpFolder);
+
+        public static string DocumentDirectory { get; set; }
+
+
     }
 }

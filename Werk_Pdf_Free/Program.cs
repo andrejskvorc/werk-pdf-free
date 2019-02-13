@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Werk_Pdf_Free
@@ -16,6 +14,14 @@ namespace Werk_Pdf_Free
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Helpers.DocumentDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\SplitedPDFs\";
+
+            if (Directory.Exists(Helpers.DocumentDirectory) == false)
+            {
+                Directory.CreateDirectory(Helpers.DocumentDirectory);
+            }
+
             Application.Run(new PDF_AutoSplitForm());
         }
     }

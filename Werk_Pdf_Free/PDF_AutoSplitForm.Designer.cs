@@ -44,6 +44,8 @@
             this.PageNumbersCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             this.Message2Label = new MaterialSkin.Controls.MaterialLabel();
             this.Message1Label = new MaterialSkin.Controls.MaterialLabel();
+            this.FileTextSpliterSingleLineTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.FileTextSpliterLabel = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
             // InputFileNameLabel
@@ -276,6 +278,7 @@
             this.PageNumbersCheckBox.TabIndex = 15;
             this.PageNumbersCheckBox.Text = "Add page numbers at the end eg. page 1 of 6";
             this.PageNumbersCheckBox.UseVisualStyleBackColor = true;
+            this.PageNumbersCheckBox.CheckedChanged += new System.EventHandler(this.PageNumbersCheckBox_CheckedChanged);
             // 
             // Message2Label
             // 
@@ -304,11 +307,46 @@
             this.Message1Label.Text = "Drag and drop from Microsoft Outlook, Desktop or Filemanager ONE (1) FILE or use " +
     "\"Load file\" button";
             // 
+            // FileTextSpliterSingleLineTextField
+            // 
+            this.FileTextSpliterSingleLineTextField.Depth = 0;
+            this.FileTextSpliterSingleLineTextField.Hint = "";
+            this.FileTextSpliterSingleLineTextField.Location = new System.Drawing.Point(590, 122);
+            this.FileTextSpliterSingleLineTextField.MaxLength = 32767;
+            this.FileTextSpliterSingleLineTextField.MouseState = MaterialSkin.MouseState.HOVER;
+            this.FileTextSpliterSingleLineTextField.Name = "FileTextSpliterSingleLineTextField";
+            this.FileTextSpliterSingleLineTextField.PasswordChar = '\0';
+            this.FileTextSpliterSingleLineTextField.SelectedText = "";
+            this.FileTextSpliterSingleLineTextField.SelectionLength = 0;
+            this.FileTextSpliterSingleLineTextField.SelectionStart = 0;
+            this.FileTextSpliterSingleLineTextField.Size = new System.Drawing.Size(19, 23);
+            this.FileTextSpliterSingleLineTextField.TabIndex = 17;
+            this.FileTextSpliterSingleLineTextField.TabStop = false;
+            this.FileTextSpliterSingleLineTextField.Text = "_";
+            this.FileTextSpliterSingleLineTextField.UseSystemPasswordChar = false;
+            this.FileTextSpliterSingleLineTextField.TextChanged += new System.EventHandler(this.FileTextSpliterSingleLineTextField_TextChanged);
+            // 
+            // FileTextSpliterLabel
+            // 
+            this.FileTextSpliterLabel.AutoSize = true;
+            this.FileTextSpliterLabel.Depth = 0;
+            this.FileTextSpliterLabel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.FileTextSpliterLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.FileTextSpliterLabel.Location = new System.Drawing.Point(472, 124);
+            this.FileTextSpliterLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.FileTextSpliterLabel.Name = "FileTextSpliterLabel";
+            this.FileTextSpliterLabel.Size = new System.Drawing.Size(112, 19);
+            this.FileTextSpliterLabel.TabIndex = 16;
+            this.FileTextSpliterLabel.Text = "File text spliter:";
+            this.FileTextSpliterLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // PDF_AutoSplitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(713, 339);
+            this.Controls.Add(this.FileTextSpliterSingleLineTextField);
+            this.Controls.Add(this.FileTextSpliterLabel);
             this.Controls.Add(this.PageNumbersCheckBox);
             this.Controls.Add(this.Message2Label);
             this.Controls.Add(this.ExitFlatButton);
@@ -356,5 +394,7 @@
         private MaterialSkin.Controls.MaterialCheckBox PageNumbersCheckBox;
         private MaterialSkin.Controls.MaterialLabel Message2Label;
         private MaterialSkin.Controls.MaterialLabel Message1Label;
+        private MaterialSkin.Controls.MaterialSingleLineTextField FileTextSpliterSingleLineTextField;
+        private MaterialSkin.Controls.MaterialLabel FileTextSpliterLabel;
     }
 }

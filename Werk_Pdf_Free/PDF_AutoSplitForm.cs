@@ -102,7 +102,39 @@ namespace Werk_Pdf_Free
 
         private void GenerateName()
         {
-           // OutputNameSingleLineTextField.Text = OutputFileNamePrefixSingleLineTextField.Text + OutputNameSingleLineTextField.Text + OutputFileNameSufixSingleLineTextField.Text + ".pdf";
+            if (inputFileName != null)
+            {
+                outputFileName = null;
+
+                if (OutputFileNamePrefixSingleLineTextField.Text != "")
+                    outputFileName = OutputFileNamePrefixSingleLineTextField.Text;
+
+                if (OutputNameSingleLineTextField.Text != "")
+                {
+                    if (OutputFileNamePrefixSingleLineTextField.Text != "")
+                    {
+                        outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputNameSingleLineTextField.Text;
+                    }
+                    else
+                    {
+                        outputFileName = OutputNameSingleLineTextField.Text;
+                    }
+
+                }
+
+                if (OutputFileNameSufixSingleLineTextField.Text != "")
+                    outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputFileNameSufixSingleLineTextField.Text;
+
+                if (PageNumbersCheckBox.CheckState == CheckState.Checked)
+                {
+                    OutputFileNameSingleLineTextField.Text = outputFileName + FileTextSpliterSingleLineTextField.Text + "teil" + FileTextSpliterSingleLineTextField.Text + "1" + FileTextSpliterSingleLineTextField.Text + "von" + FileTextSpliterSingleLineTextField.Text + "6.pdf";
+                }
+                else
+                {
+                    OutputFileNameSingleLineTextField.Text = outputFileName + FileTextSpliterSingleLineTextField.Text + "Seit" + FileTextSpliterSingleLineTextField.Text + "1.pdf";
+                }
+            }
+            
         }
 
         private void PDF_AutoSplitForm_DragEnter(object sender, DragEventArgs e)
@@ -253,12 +285,9 @@ namespace Werk_Pdf_Free
 
         private void SplitFlatButton_Click(object sender, EventArgs e)
         {
-
-
-
+            string spliter = FileTextSpliterSingleLineTextField.Text;
 
             PdfDocument inputDocument = PdfReader.Open(inputFileName, PdfDocumentOpenMode.Import);
-            string name = Path.GetFileNameWithoutExtension(OutputFileNameSingleLineTextField.Text);
 
             for (int idx = 0; idx < inputDocument.PageCount; idx++)
             {
@@ -271,64 +300,40 @@ namespace Werk_Pdf_Free
                if(PageNumbersCheckBox.CheckState == CheckState.Checked)
                 {
                     outputDocument.Info.Title =
-                            String.Format("Page {0} of {1}", idx + 1, inputDocument.Info.Title);
+                            String.Format("Seit {0} von {1}", idx + 1, inputDocument.Info.Title);
                     outputDocument.Info.Creator = inputDocument.Info.Creator;
+
+                    //Create Document FileName
+                    string SaveFileName = String.Format("{0}Teil{3}{1}{3}von{3}{2}.pdf", outputFileName, idx + 1, inputDocument.PageCount, spliter);
 
                     // Add the page and save it
                     outputDocument.AddPage(inputDocument.Pages[idx]);
-                    outputDocument.Save(String.Format("{0} - Page {1} of {2}.pdf", name, idx + 1, inputDocument.PageCount));
+                    outputDocument.Save(SaveFileName);
                 }
                 else
                 {
                     outputDocument.Info.Title =
-                            String.Format("Page {0} of {1}", idx + 1, inputDocument.Info.Title);
+                            String.Format("Seit {0} von {1}", idx + 1, inputDocument.Info.Title);
                     outputDocument.Info.Creator = inputDocument.Info.Creator;
+
+                    //Create Document FileName
+                    string SaveFileName = String.Format("{0}{2}Seite{2}{1}.pdf", inputDocument, idx + 1, spliter);
 
                     // Add the page and save it
                     outputDocument.AddPage(inputDocument.Pages[idx]);
-                    outputDocument.Save(String.Format("{0} - Page {1}.pdf", name, idx + 1));
+                    outputDocument.Save(SaveFileName);
                 }
 
             }
 
         }
-
-        public void Example()
-        {
-            // Get a fresh copy of the sample PDF file
-            const string filename = "Portable Document Format.pdf";
-            File.Copy(Path.Combine("../../../../../PDFs/", filename),
-              Path.Combine(Directory.GetCurrentDirectory(), filename), true);
-
-            // Open the file
-            PdfDocument inputDocument = PdfReader.Open(filename, PdfDocumentOpenMode.Import);
-
-            string name = Path.GetFileNameWithoutExtension(filename);
-            for (int idx = 0; idx < inputDocument.PageCount; idx++)
-            {
-                // Create new document
-                PdfDocument outputDocument = new PdfDocument
-                {
-                    Version = inputDocument.Version
-                };
-
-                outputDocument.Info.Title =
-                  String.Format("Page {0} of {1}", idx + 1, inputDocument.Info.Title);
-                outputDocument.Info.Creator = inputDocument.Info.Creator;
-
-                // Add the page and save it
-                outputDocument.AddPage(inputDocument.Pages[idx]);
-                outputDocument.Save(String.Format("{0} - Page {1}_tempfile.pdf", name, idx + 1));
-            }
-        }
-
 
         private void LoadFileFlatButton_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
-                InitialDirectory = @"C:\",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Title = "Open PDF File for spliting",
                 DefaultExt = "pdf",
                 Filter = "PDF files (*.pdf)|*.pdf",
@@ -344,6 +349,16 @@ namespace Werk_Pdf_Free
             }
 
 
+        }
+
+        private void PageNumbersCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GenerateName();
+        }
+
+        private void FileTextSpliterSingleLineTextField_TextChanged(object sender, EventArgs e)
+        {
+            GenerateName();
         }
     }
 }
