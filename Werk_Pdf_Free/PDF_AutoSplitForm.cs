@@ -34,7 +34,9 @@ namespace Werk_Pdf_Free
 
         private readonly MaterialSkinManager materialSkinManager;
 
-        public string inputFileName;
+        private string inputFileName;
+        private string outputFileName;
+
         public PDF_AutoSplitForm()
         {
             InitializeComponent();
@@ -251,6 +253,10 @@ namespace Werk_Pdf_Free
 
         private void SplitFlatButton_Click(object sender, EventArgs e)
         {
+
+
+
+
             PdfDocument inputDocument = PdfReader.Open(inputFileName, PdfDocumentOpenMode.Import);
             string name = Path.GetFileNameWithoutExtension(OutputFileNameSingleLineTextField.Text);
 
