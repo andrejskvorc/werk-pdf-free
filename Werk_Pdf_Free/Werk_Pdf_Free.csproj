@@ -64,6 +64,8 @@
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
@@ -99,6 +101,18 @@
     <Compile Include="OutlookDataObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplitPdf.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SplitPdf.Designer.cs">
+      <DependentUpon>SplitPdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Werk_Pdf_Free.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Werk_Pdf_Free.Designer.cs">
+      <DependentUpon>Werk_Pdf_Free.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MessageBoxForm.resx">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +129,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SplitPdf.resx">
+      <DependentUpon>SplitPdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Werk_Pdf_Free.resx">
+      <DependentUpon>Werk_Pdf_Free.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="log4net.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

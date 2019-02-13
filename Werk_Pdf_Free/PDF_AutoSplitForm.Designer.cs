@@ -46,6 +46,7 @@
             this.Message1Label = new MaterialSkin.Controls.MaterialLabel();
             this.FileTextSpliterSingleLineTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.FileTextSpliterLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.SaveDirectoryCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // InputFileNameLabel
@@ -64,11 +65,12 @@
             // 
             // ExitFlatButton
             // 
+            this.ExitFlatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExitFlatButton.AutoSize = true;
             this.ExitFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ExitFlatButton.Depth = 0;
             this.ExitFlatButton.Icon = null;
-            this.ExitFlatButton.Location = new System.Drawing.Point(652, 290);
+            this.ExitFlatButton.Location = new System.Drawing.Point(658, 316);
             this.ExitFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ExitFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.ExitFlatButton.Name = "ExitFlatButton";
@@ -137,12 +139,13 @@
             // 
             // LoadFileFlatButton
             // 
+            this.LoadFileFlatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LoadFileFlatButton.AutoSize = true;
             this.LoadFileFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.LoadFileFlatButton.Depth = 0;
             this.LoadFileFlatButton.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoadFileFlatButton.Icon = null;
-            this.LoadFileFlatButton.Location = new System.Drawing.Point(616, 86);
+            this.LoadFileFlatButton.Location = new System.Drawing.Point(623, 86);
             this.LoadFileFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadFileFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadFileFlatButton.Name = "LoadFileFlatButton";
@@ -155,12 +158,13 @@
             // 
             // SplitFlatButton
             // 
+            this.SplitFlatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SplitFlatButton.AutoSize = true;
             this.SplitFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.SplitFlatButton.Depth = 0;
             this.SplitFlatButton.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SplitFlatButton.Icon = null;
-            this.SplitFlatButton.Location = new System.Drawing.Point(616, 211);
+            this.SplitFlatButton.Location = new System.Drawing.Point(623, 211);
             this.SplitFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SplitFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.SplitFlatButton.Name = "SplitFlatButton";
@@ -173,6 +177,8 @@
             // 
             // InputFileNameSingleLineTextField
             // 
+            this.InputFileNameSingleLineTextField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.InputFileNameSingleLineTextField.Depth = 0;
             this.InputFileNameSingleLineTextField.Enabled = false;
             this.InputFileNameSingleLineTextField.Hint = "";
@@ -184,7 +190,7 @@
             this.InputFileNameSingleLineTextField.SelectedText = "";
             this.InputFileNameSingleLineTextField.SelectionLength = 0;
             this.InputFileNameSingleLineTextField.SelectionStart = 0;
-            this.InputFileNameSingleLineTextField.Size = new System.Drawing.Size(476, 23);
+            this.InputFileNameSingleLineTextField.Size = new System.Drawing.Size(483, 23);
             this.InputFileNameSingleLineTextField.TabIndex = 1;
             this.InputFileNameSingleLineTextField.TabStop = false;
             this.InputFileNameSingleLineTextField.UseSystemPasswordChar = false;
@@ -209,6 +215,8 @@
             // 
             // OutputNameSingleLineTextField
             // 
+            this.OutputNameSingleLineTextField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputNameSingleLineTextField.Depth = 0;
             this.OutputNameSingleLineTextField.Hint = "";
             this.OutputNameSingleLineTextField.Location = new System.Drawing.Point(133, 155);
@@ -219,7 +227,7 @@
             this.OutputNameSingleLineTextField.SelectedText = "";
             this.OutputNameSingleLineTextField.SelectionLength = 0;
             this.OutputNameSingleLineTextField.SelectionStart = 0;
-            this.OutputNameSingleLineTextField.Size = new System.Drawing.Size(476, 23);
+            this.OutputNameSingleLineTextField.Size = new System.Drawing.Size(483, 23);
             this.OutputNameSingleLineTextField.TabIndex = 6;
             this.OutputNameSingleLineTextField.TabStop = false;
             this.OutputNameSingleLineTextField.UseSystemPasswordChar = false;
@@ -245,6 +253,8 @@
             // 
             // OutputFileNameSingleLineTextField
             // 
+            this.OutputFileNameSingleLineTextField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputFileNameSingleLineTextField.Depth = 0;
             this.OutputFileNameSingleLineTextField.Enabled = false;
             this.OutputFileNameSingleLineTextField.Hint = "";
@@ -256,7 +266,7 @@
             this.OutputFileNameSingleLineTextField.SelectedText = "";
             this.OutputFileNameSingleLineTextField.SelectionLength = 0;
             this.OutputFileNameSingleLineTextField.SelectionStart = 0;
-            this.OutputFileNameSingleLineTextField.Size = new System.Drawing.Size(476, 23);
+            this.OutputFileNameSingleLineTextField.Size = new System.Drawing.Size(483, 23);
             this.OutputFileNameSingleLineTextField.TabIndex = 10;
             this.OutputFileNameSingleLineTextField.TabStop = false;
             this.OutputFileNameSingleLineTextField.UseSystemPasswordChar = false;
@@ -286,7 +296,7 @@
             this.Message2Label.Depth = 0;
             this.Message2Label.Font = new System.Drawing.Font("Roboto", 11F);
             this.Message2Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Message2Label.Location = new System.Drawing.Point(15, 290);
+            this.Message2Label.Location = new System.Drawing.Point(14, 316);
             this.Message2Label.MouseState = MaterialSkin.MouseState.HOVER;
             this.Message2Label.Name = "Message2Label";
             this.Message2Label.Size = new System.Drawing.Size(359, 19);
@@ -299,7 +309,7 @@
             this.Message1Label.Depth = 0;
             this.Message1Label.Font = new System.Drawing.Font("Roboto", 11F);
             this.Message1Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Message1Label.Location = new System.Drawing.Point(15, 311);
+            this.Message1Label.Location = new System.Drawing.Point(14, 337);
             this.Message1Label.MouseState = MaterialSkin.MouseState.HOVER;
             this.Message1Label.Name = "Message1Label";
             this.Message1Label.Size = new System.Drawing.Size(686, 19);
@@ -309,9 +319,10 @@
             // 
             // FileTextSpliterSingleLineTextField
             // 
+            this.FileTextSpliterSingleLineTextField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FileTextSpliterSingleLineTextField.Depth = 0;
             this.FileTextSpliterSingleLineTextField.Hint = "";
-            this.FileTextSpliterSingleLineTextField.Location = new System.Drawing.Point(590, 122);
+            this.FileTextSpliterSingleLineTextField.Location = new System.Drawing.Point(597, 122);
             this.FileTextSpliterSingleLineTextField.MaxLength = 32767;
             this.FileTextSpliterSingleLineTextField.MouseState = MaterialSkin.MouseState.HOVER;
             this.FileTextSpliterSingleLineTextField.Name = "FileTextSpliterSingleLineTextField";
@@ -328,11 +339,12 @@
             // 
             // FileTextSpliterLabel
             // 
+            this.FileTextSpliterLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FileTextSpliterLabel.AutoSize = true;
             this.FileTextSpliterLabel.Depth = 0;
             this.FileTextSpliterLabel.Font = new System.Drawing.Font("Roboto", 11F);
             this.FileTextSpliterLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.FileTextSpliterLabel.Location = new System.Drawing.Point(472, 124);
+            this.FileTextSpliterLabel.Location = new System.Drawing.Point(479, 124);
             this.FileTextSpliterLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.FileTextSpliterLabel.Name = "FileTextSpliterLabel";
             this.FileTextSpliterLabel.Size = new System.Drawing.Size(112, 19);
@@ -340,11 +352,30 @@
             this.FileTextSpliterLabel.Text = "File text spliter:";
             this.FileTextSpliterLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // SaveDirectoryCheckBox
+            // 
+            this.SaveDirectoryCheckBox.AutoSize = true;
+            this.SaveDirectoryCheckBox.Checked = true;
+            this.SaveDirectoryCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SaveDirectoryCheckBox.Depth = 0;
+            this.SaveDirectoryCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
+            this.SaveDirectoryCheckBox.Location = new System.Drawing.Point(133, 274);
+            this.SaveDirectoryCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.SaveDirectoryCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.SaveDirectoryCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SaveDirectoryCheckBox.Name = "SaveDirectoryCheckBox";
+            this.SaveDirectoryCheckBox.Ripple = true;
+            this.SaveDirectoryCheckBox.Size = new System.Drawing.Size(282, 30);
+            this.SaveDirectoryCheckBox.TabIndex = 18;
+            this.SaveDirectoryCheckBox.Text = "Save splited files to directory of input file";
+            this.SaveDirectoryCheckBox.UseVisualStyleBackColor = true;
+            // 
             // PDF_AutoSplitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 339);
+            this.ClientSize = new System.Drawing.Size(720, 360);
+            this.Controls.Add(this.SaveDirectoryCheckBox);
             this.Controls.Add(this.FileTextSpliterSingleLineTextField);
             this.Controls.Add(this.FileTextSpliterLabel);
             this.Controls.Add(this.PageNumbersCheckBox);
@@ -365,6 +396,7 @@
             this.Controls.Add(this.InputFileNameLabel);
             this.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PDF_AutoSplitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF AutoSplit";
@@ -396,5 +428,6 @@
         private MaterialSkin.Controls.MaterialLabel Message1Label;
         private MaterialSkin.Controls.MaterialSingleLineTextField FileTextSpliterSingleLineTextField;
         private MaterialSkin.Controls.MaterialLabel FileTextSpliterLabel;
+        private MaterialSkin.Controls.MaterialCheckBox SaveDirectoryCheckBox;
     }
 }

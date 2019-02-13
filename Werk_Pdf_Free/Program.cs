@@ -22,7 +22,7 @@ namespace Werk_Pdf_Free
                 Directory.CreateDirectory(Helpers.DocumentDirectory);
             }
 
-            Application.Run(new PDF_AutoSplitForm());
+            Application.Run(new Werk_Pdf_Free());
         }
     }
 }

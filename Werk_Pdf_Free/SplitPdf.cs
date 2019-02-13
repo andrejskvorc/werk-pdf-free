@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,77 +11,81 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Drawing.Text;
 using System.IO;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace Werk_Pdf_Free
 {
-    public partial class PDF_AutoSplitForm : MaterialForm
+    public partial class SplitPdf : UserControl
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
-           IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+         IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
         Font RobotoRegulatFont11;
+        Font RobotoBoldFont12;
         Font RobotoRegulatFont10;
         Font RobotoRegulatFont9;
         Font RobotoRegulatFont825;
 
-        public bool AsUserControl { get; set; } = false;
+        private string inputFileName = null;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly MaterialSkinManager materialSkinManager;
-
-        private string inputFileName;
-        private string outputFileName;
-
-        public PDF_AutoSplitForm()
+        private string outputFileName = null;
+        public Color _defaultBackColor { get; set; }
+        private void RegularFonts()
         {
-            InitializeComponent();
-
-            this.Icon = Properties.Resources.icons8_split_files_961;
-
-            this.AllowDrop = true;
-
-            byte[] fontData = Properties.Resources.Roboto_Regular;
-            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
-            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            byte[] fontDataRegualar = Properties.Resources.Roboto_Regular;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontDataRegualar.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontDataRegualar, 0, fontPtr, fontDataRegualar.Length);
             uint dummy = 0;
             fonts.AddMemoryFont(fontPtr, Properties.Resources.Roboto_Regular.Length);
             AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.Roboto_Regular.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
 
             RobotoRegulatFont11 = new Font(fonts.Families[0], 11.0F);
             RobotoRegulatFont10 = new Font(fonts.Families[0], 10.0F);
             RobotoRegulatFont9 = new Font(fonts.Families[0], 9.0F);
             RobotoRegulatFont825 = new Font(fonts.Families[0], 8.25F);
 
+        }
+        private void BoldFonts()
+        {
+            byte[] fontDataBold = Properties.Resources.Roboto_Bold;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontDataBold.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontDataBold, 0, fontPtr, fontDataBold.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.Roboto_Bold.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.Roboto_Bold.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
+            RobotoBoldFont12 = new Font(fonts.Families[0], 12.0F);
+           
+        }
+        public SplitPdf()
+        {
+            InitializeComponent();
+            this.AllowDrop = true;
+
+            RegularFonts();
+            BoldFonts();
+
+            var materialSkinManager = MaterialSkinManager.Instance; 
+
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-        }
 
-        private void ExitFlatButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
-        private void PDF_AutoSplit_Load(object sender, EventArgs e)
+
+        }
+        private void SplitPdf_Load(object sender, EventArgs e)
         {
 
-            if (AsUserControl == true)
-            {
-                ExitFlatButton.Visible = false;
-                MinimizeBox = false;
-                ControlBox = false;
-                SizeGripStyle = SizeGripStyle.Hide;
-                TopLevel = false;
-                FormBorderStyle = FormBorderStyle.None;
-                Dock = DockStyle.Fill;
-            }
+            BackColor = _defaultBackColor;
 
             InputFileNameLabel.Font = RobotoRegulatFont11;
             OutputFilePrefixLabel.Font = RobotoRegulatFont11;
@@ -100,19 +102,18 @@ namespace Werk_Pdf_Free
 
             LoadFileFlatButton.Font = RobotoRegulatFont825;
             SplitFlatButton.Font = RobotoRegulatFont825;
-            ExitFlatButton.Font = RobotoRegulatFont825;
 
-            Message1Label.Font = RobotoRegulatFont9;
-            Message2Label.Font = RobotoRegulatFont9;
+            Message1Label.Font = RobotoRegulatFont10;
+            Message2Label.Font = RobotoRegulatFont10;
+            HeaderLabel.Font = RobotoBoldFont12;
+            HeaderLabel.ForeColor = Color.White;
         }
-
         private void ProcessInputFile()
         {
             InputFileNameSingleLineTextField.Text = Path.GetFileName(inputFileName);
             OutputNameSingleLineTextField.Text = Path.GetFileNameWithoutExtension(inputFileName);
             GenerateName();
         }
-
         private void GenerateName()
         {
             if (inputFileName != null)
@@ -120,13 +121,13 @@ namespace Werk_Pdf_Free
                 outputFileName = null;
 
                 if (OutputFileNamePrefixSingleLineTextField.Text != "")
-                    outputFileName = OutputFileNamePrefixSingleLineTextField.Text;
+                    outputFileName = OutputFileNamePrefixSingleLineTextField.Text + FileTextSpliterSingleLineTextField.Text;
 
                 if (OutputNameSingleLineTextField.Text != "")
                 {
                     if (OutputFileNamePrefixSingleLineTextField.Text != "")
                     {
-                        outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputNameSingleLineTextField.Text;
+                        outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputNameSingleLineTextField.Text + FileTextSpliterSingleLineTextField.Text ;
                     }
                     else
                     {
@@ -136,35 +137,22 @@ namespace Werk_Pdf_Free
                 }
 
                 if (OutputFileNameSufixSingleLineTextField.Text != "")
-                    outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputFileNameSufixSingleLineTextField.Text;
+                    outputFileName = outputFileName + FileTextSpliterSingleLineTextField.Text + OutputFileNameSufixSingleLineTextField.Text + FileTextSpliterSingleLineTextField.Text;
 
                 if (PageNumbersCheckBox.CheckState == CheckState.Checked)
                 {
-                    OutputFileNameSingleLineTextField.Text = outputFileName + FileTextSpliterSingleLineTextField.Text + "teil" + FileTextSpliterSingleLineTextField.Text + "1" + FileTextSpliterSingleLineTextField.Text + "von" + FileTextSpliterSingleLineTextField.Text + "6.pdf";
+                    OutputFileNameSingleLineTextField.Text = outputFileName + "teil" + FileTextSpliterSingleLineTextField.Text + "1" + FileTextSpliterSingleLineTextField.Text + "von" + FileTextSpliterSingleLineTextField.Text + "6.pdf";
                 }
                 else
                 {
-                    OutputFileNameSingleLineTextField.Text = outputFileName + FileTextSpliterSingleLineTextField.Text + "Seit" + FileTextSpliterSingleLineTextField.Text + "1.pdf";
+                    OutputFileNameSingleLineTextField.Text = outputFileName + "Seit" + FileTextSpliterSingleLineTextField.Text + "1.pdf";
                 }
             }
-            
-        }
 
-        private void PDF_AutoSplitForm_DragEnter(object sender, DragEventArgs e)
-        {
-            // Check if the Dataformat of the data can be accepted
-            // (we only accept file drops from Explorer, etc.)
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy; // Okay
-            //    or this tells us if it is an Outlook attachment drop
-            else if (e.Data.GetDataPresent("FileGroupDescriptor"))
-            { e.Effect = DragDropEffects.Copy; }
-            else
-                e.Effect = DragDropEffects.None; // Unknown data, ignore it
         }
-
-        private void PDF_AutoSplitForm_DragDrop(object sender, DragEventArgs e)
+        private void SplitPdf_DragDrop(object sender, DragEventArgs e)
         {
+            this.BackColor = _defaultBackColor;
 
             //Tuple to store all files
             List<Tuple<string>> FileListT = new List<Tuple<string>>();
@@ -238,11 +226,11 @@ namespace Werk_Pdf_Free
                 msgbox.ShowDialog();
                 msgbox.Dispose();
                 return;
-                
+
             }
             else
             {
- 
+
                 foreach (Tuple<string> FileFromList in FileListT)
                 {
                     string Ext = Path.GetExtension(FileFromList.Item1).ToLower();
@@ -280,24 +268,64 @@ namespace Werk_Pdf_Free
                 }
             }
         }
+        private void SplitPdf_DragEnter(object sender, DragEventArgs e)
+        {
+            // Check if the Dataformat of the data can be accepted
+            // (we only accept file drops from Explorer, etc.)
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy; // Okay
+            //    or this tells us if it is an Outlook attachment drop
+            else if (e.Data.GetDataPresent("FileGroupDescriptor"))
+            { e.Effect = DragDropEffects.Copy; }
+            else
+                e.Effect = DragDropEffects.None; // Unknown data, ignore it
 
+        }
+        private void SplitPdf_DragOver(object sender, DragEventArgs e)
+        {
+            if (AmIStillInsideTheUserControl(this) == true)
+                this.BackColor = Color.LightBlue;
+        }
+        private void SplitPdf_DragLeave(object sender, EventArgs e)
+        {
+            if (AmIStillInsideTheUserControl(this) == false)
+                this.BackColor = _defaultBackColor;
+
+        }
+        private bool AmIStillInsideTheUserControl(Control control)
+        {
+            Rectangle r = control.RectangleToScreen(control.ClientRectangle);
+            Point p = Cursor.Position;
+            return r.Contains(p);
+        }
         private void OutputFileNamePrefixSingleLineTextField_TextChanged(object sender, EventArgs e)
         {
             GenerateName();
         }
-
         private void OutputNameSingleLineTextField_TextChanged(object sender, EventArgs e)
         {
             GenerateName();
         }
-
         private void OutputFileNameSufixSingleLineTextField_TextChanged(object sender, EventArgs e)
         {
             GenerateName();
         }
-
         private void SplitFlatButton_Click(object sender, EventArgs e)
         {
+
+            if(inputFileName == null)
+            {
+                MessageBoxForm msgbox = new MessageBoxForm()
+                {
+                    Caption = "Error: No PDF file!",
+                    Message = "Error: Please add PDF file for spliting!"
+                };
+
+                msgbox.ShowDialog();
+                msgbox.Dispose();
+                return;
+            }
+
             string spliter = FileTextSpliterSingleLineTextField.Text;
             string outFolderName = Helpers.DocumentDirectory;
 
@@ -314,7 +342,7 @@ namespace Werk_Pdf_Free
                     Version = inputDocument.Version
                 };
 
-               if(PageNumbersCheckBox.CheckState == CheckState.Checked)
+                if (PageNumbersCheckBox.CheckState == CheckState.Checked)
                 {
                     outputDocument.Info.Title =
                             String.Format("Seit {0} von {1}", idx + 1, inputDocument.Info.Title);
@@ -342,12 +370,9 @@ namespace Werk_Pdf_Free
                 }
 
             }
-
         }
-
         private void LoadFileFlatButton_Click(object sender, EventArgs e)
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -365,17 +390,27 @@ namespace Werk_Pdf_Free
                 ProcessInputFile();
             }
 
-
         }
-
         private void PageNumbersCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             GenerateName();
         }
-
         private void FileTextSpliterSingleLineTextField_TextChanged(object sender, EventArgs e)
         {
             GenerateName();
+        }
+        private void ClearFlatButton_Click(object sender, EventArgs e)
+        {
+            inputFileName = null;
+            outputFileName = null;
+            InputFileNameSingleLineTextField.Text = "";
+            OutputFileNamePrefixSingleLineTextField.Text = "";
+            FileTextSpliterSingleLineTextField.Text = "_";
+            OutputNameSingleLineTextField.Text = "";
+            OutputFileNameSufixSingleLineTextField.Text = "";
+            OutputFileNameSingleLineTextField.Text = "";
+            PageNumbersCheckBox.CheckState = CheckState.Checked;
+            SaveDirectoryCheckBox.CheckState = CheckState.Checked;
         }
     }
 }
