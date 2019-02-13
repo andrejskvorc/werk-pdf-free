@@ -107,5 +107,35 @@ namespace Werk_Pdf_Free
             control.Dock = DockStyle.Fill;
             PdfSplitContainer.Panel2.Controls.Add(control);
         }
+
+        private void MergePdfFilesFlatButton_Click(object sender, EventArgs e)
+        {
+            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            {
+                AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+            }
+            else
+            {
+                foreach (Control control in PdfSplitContainer.Panel2.Controls)
+                {
+                    if (control.Name != "MergePDF")
+                    {
+                        control.Dispose();
+                        PdfSplitContainer.Panel2.Controls.Remove(control);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+            }
+        }
+
+        private void SettingsFlatButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

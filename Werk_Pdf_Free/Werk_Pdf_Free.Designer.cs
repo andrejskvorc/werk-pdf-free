@@ -30,9 +30,10 @@
         {
             this.PdfSplitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.MergePdfFilesFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.ExitFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
-            this.MergePdfFilesFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
+            this.SettingsFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.PdfSplitContainer)).BeginInit();
             this.PdfSplitContainer.Panel1.SuspendLayout();
             this.PdfSplitContainer.SuspendLayout();
@@ -59,19 +60,38 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.SettingsFlatButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.MergePdfFilesFlatButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.materialFlatButton1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ExitFlatButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ExitFlatButton, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(137, 418);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // MergePdfFilesFlatButton
+            // 
+            this.MergePdfFilesFlatButton.AutoSize = true;
+            this.MergePdfFilesFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MergePdfFilesFlatButton.Depth = 0;
+            this.MergePdfFilesFlatButton.Icon = null;
+            this.MergePdfFilesFlatButton.Location = new System.Drawing.Point(4, 42);
+            this.MergePdfFilesFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.MergePdfFilesFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.MergePdfFilesFlatButton.Name = "MergePdfFilesFlatButton";
+            this.MergePdfFilesFlatButton.Primary = false;
+            this.MergePdfFilesFlatButton.Size = new System.Drawing.Size(129, 24);
+            this.MergePdfFilesFlatButton.TabIndex = 0;
+            this.MergePdfFilesFlatButton.Text = "Merge PDF files";
+            this.MergePdfFilesFlatButton.UseVisualStyleBackColor = true;
+            this.MergePdfFilesFlatButton.Click += new System.EventHandler(this.MergePdfFilesFlatButton_Click);
             // 
             // materialFlatButton1
             // 
@@ -96,7 +116,7 @@
             this.ExitFlatButton.AutoSize = true;
             this.ExitFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ExitFlatButton.Depth = 0;
-            this.ExitFlatButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ExitFlatButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ExitFlatButton.Icon = null;
             this.ExitFlatButton.Location = new System.Drawing.Point(4, 388);
             this.ExitFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -109,21 +129,23 @@
             this.ExitFlatButton.UseVisualStyleBackColor = true;
             this.ExitFlatButton.Click += new System.EventHandler(this.ExitFlatButton_Click);
             // 
-            // MergePdfFilesFlatButton
+            // SettingsFlatButton
             // 
-            this.MergePdfFilesFlatButton.AutoSize = true;
-            this.MergePdfFilesFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.MergePdfFilesFlatButton.Depth = 0;
-            this.MergePdfFilesFlatButton.Icon = null;
-            this.MergePdfFilesFlatButton.Location = new System.Drawing.Point(4, 42);
-            this.MergePdfFilesFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.MergePdfFilesFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
-            this.MergePdfFilesFlatButton.Name = "MergePdfFilesFlatButton";
-            this.MergePdfFilesFlatButton.Primary = false;
-            this.MergePdfFilesFlatButton.Size = new System.Drawing.Size(129, 24);
-            this.MergePdfFilesFlatButton.TabIndex = 0;
-            this.MergePdfFilesFlatButton.Text = "Merge PDF files";
-            this.MergePdfFilesFlatButton.UseVisualStyleBackColor = true;
+            this.SettingsFlatButton.AutoSize = true;
+            this.SettingsFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SettingsFlatButton.Depth = 0;
+            this.SettingsFlatButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SettingsFlatButton.Icon = null;
+            this.SettingsFlatButton.Location = new System.Drawing.Point(4, 352);
+            this.SettingsFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.SettingsFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SettingsFlatButton.Name = "SettingsFlatButton";
+            this.SettingsFlatButton.Primary = false;
+            this.SettingsFlatButton.Size = new System.Drawing.Size(129, 24);
+            this.SettingsFlatButton.TabIndex = 0;
+            this.SettingsFlatButton.Text = "Settings";
+            this.SettingsFlatButton.UseVisualStyleBackColor = true;
+            this.SettingsFlatButton.Click += new System.EventHandler(this.SettingsFlatButton_Click);
             // 
             // Werk_Pdf_Free
             // 
@@ -152,5 +174,6 @@
         private MaterialSkin.Controls.MaterialFlatButton ExitFlatButton;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
         private MaterialSkin.Controls.MaterialFlatButton MergePdfFilesFlatButton;
+        private MaterialSkin.Controls.MaterialFlatButton SettingsFlatButton;
     }
 }

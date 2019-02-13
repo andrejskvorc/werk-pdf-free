@@ -85,17 +85,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaterialListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MergePDF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MergePDF.Designer.cs">
+      <DependentUpon>MergePDF.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MessageBoxForm.Designer.cs">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PDF_AutoSplitForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PDF_AutoSplitForm.Designer.cs">
-      <DependentUpon>PDF_AutoSplitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="OutlookDataObject.cs" />
@@ -113,11 +116,11 @@
     <Compile Include="Werk_Pdf_Free.Designer.cs">
       <DependentUpon>Werk_Pdf_Free.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MergePDF.resx">
+      <DependentUpon>MergePDF.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MessageBoxForm.resx">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PDF_AutoSplitForm.resx">
-      <DependentUpon>PDF_AutoSplitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
