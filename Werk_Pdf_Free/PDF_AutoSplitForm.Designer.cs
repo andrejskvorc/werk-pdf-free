@@ -201,7 +201,7 @@
             this.OutputFileNamePrefixSingleLineTextField.SelectedText = "";
             this.OutputFileNamePrefixSingleLineTextField.SelectionLength = 0;
             this.OutputFileNamePrefixSingleLineTextField.SelectionStart = 0;
-            this.OutputFileNamePrefixSingleLineTextField.Size = new System.Drawing.Size(59, 23);
+            this.OutputFileNamePrefixSingleLineTextField.Size = new System.Drawing.Size(187, 23);
             this.OutputFileNamePrefixSingleLineTextField.TabIndex = 4;
             this.OutputFileNamePrefixSingleLineTextField.TabStop = false;
             this.OutputFileNamePrefixSingleLineTextField.UseSystemPasswordChar = false;
@@ -237,7 +237,7 @@
             this.OutputFileNameSufixSingleLineTextField.SelectedText = "";
             this.OutputFileNameSufixSingleLineTextField.SelectionLength = 0;
             this.OutputFileNameSufixSingleLineTextField.SelectionStart = 0;
-            this.OutputFileNameSufixSingleLineTextField.Size = new System.Drawing.Size(59, 23);
+            this.OutputFileNameSufixSingleLineTextField.Size = new System.Drawing.Size(187, 23);
             this.OutputFileNameSufixSingleLineTextField.TabIndex = 8;
             this.OutputFileNameSufixSingleLineTextField.TabStop = false;
             this.OutputFileNameSufixSingleLineTextField.UseSystemPasswordChar = false;

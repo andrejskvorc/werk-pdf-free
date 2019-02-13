@@ -308,7 +308,7 @@ namespace Werk_Pdf_Free
 
                     // Add the page and save it
                     outputDocument.AddPage(inputDocument.Pages[idx]);
-                    outputDocument.Save(SaveFileName);
+                    outputDocument.Save(Path.Combine(Helpers.DocumentDirectory + SaveFileName));
                 }
                 else
                 {
@@ -321,7 +321,7 @@ namespace Werk_Pdf_Free
 
                     // Add the page and save it
                     outputDocument.AddPage(inputDocument.Pages[idx]);
-                    outputDocument.Save(SaveFileName);
+                    outputDocument.Save(Path.Combine(Helpers.DocumentDirectory + SaveFileName));
                 }
 
             }
