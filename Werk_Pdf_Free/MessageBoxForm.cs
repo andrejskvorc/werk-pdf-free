@@ -30,8 +30,6 @@ namespace Werk_Pdf_Free
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly MaterialSkinManager materialSkinManager;
-
         public string Message { get; set; }
         public string Caption { get; set; }
 

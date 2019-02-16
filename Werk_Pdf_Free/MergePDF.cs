@@ -18,9 +18,11 @@ namespace Werk_Pdf_Free
 {
     public partial class MergePDF : UserControl
     {
-
+        //Declare loging component
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+
+        //Createing and loading embeded font so user does not have to install it in his system
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -36,7 +38,10 @@ namespace Werk_Pdf_Free
         // The LVItem being dragged
         private ListViewItem _itemDnD = null;
 
+        //Seting default backcolor for user control
         public Color _defaultBackColor { get; set; }
+
+        //Loading regular fonts
         private void RegularFonts()
         {
             byte[] fontDataRegualar = Properties.Resources.Roboto_Regular;
@@ -54,6 +59,8 @@ namespace Werk_Pdf_Free
             RobotoRegulatFont825 = new Font(fonts.Families[0], 8.25F);
 
         }
+
+        //Loading Boldfonts
         private void BoldFonts()
         {
             byte[] fontDataBold = Properties.Resources.Roboto_Bold;
@@ -73,6 +80,7 @@ namespace Werk_Pdf_Free
             RegularFonts();
             BoldFonts();
 
+            //Creating materialSking manager
             var materialSkinManager = MaterialSkinManager.Instance;
 
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -92,18 +100,25 @@ namespace Werk_Pdf_Free
 
             LoadFilesFlatButton.Location = position;
 
+            position.Y = MergeFlatButton.Location.Y;
+
+            MergeFlatButton.Location = position;
+
             FilesListView.Columns[0].Width = FilesListView.Width;
             
 
         }
         private bool AmIStillInsideTheUserControl(Control control)
         {
+            //Function for DragAndDrop to check if mouse is still over user control
             Rectangle r = control.RectangleToScreen(control.ClientRectangle);
             Point p = Cursor.Position;
             return r.Contains(p);
         }
         private void LoadFilesFlatButton_Click(object sender, EventArgs e)
         {
+            //ToDo: Create MaterialSkin LoadFileDialog
+            //We ask user to select PDF files for merging and load them to ListView
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -117,6 +132,7 @@ namespace Werk_Pdf_Free
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                //For better readability we show in listview only names, and save complete path with name in imageKey string of listview
                 foreach(string item in openFileDialog.FileNames)
                 {
                     FilesListView.Items.Add(Path.GetFileName(item), item);
@@ -186,12 +202,10 @@ namespace Werk_Pdf_Free
                 }
             }
         }
-
         private void MoveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MoveListViewItems(FilesListView, MoveDirection.Up);
         }
-
         private void MoveDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MoveListViewItems(FilesListView, MoveDirection.Down);
@@ -216,6 +230,156 @@ namespace Werk_Pdf_Free
                 }
             }
         }
+        private void MergePDF_DragEnter(object sender, DragEventArgs e)
+        {
+            // Check if the Dataformat of the data can be accepted
+            // (we only accept file drops from Explorer, etc.)
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy; // Okay
+            //    or this tells us if it is an Outlook attachment drop
+            else if (e.Data.GetDataPresent("FileGroupDescriptor"))
+            { e.Effect = DragDropEffects.Copy; }
+            else
+                e.Effect = DragDropEffects.None; // Unknown data, ignore it
+        }
+        private void MergePDF_DragDrop(object sender, DragEventArgs e)
+        {
+            //Making shure backcolor is normal color
+            this.BackColor = _defaultBackColor;
 
+            //Tuple to store all files
+            List<Tuple<string>> FileListT = new List<Tuple<string>>();
+
+            //Temp string list for Drag And Drop from explorer
+            string[] FileList = null;
+
+            //Detect drag and drop from Explorer
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false) == true)
+            {
+                // Extract the data from the DataObject-Container into a string list
+                FileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+                try
+                {
+                    //Add extracted pdf files to Tuple
+                    foreach (string item in FileList)
+                    {
+                        if (Path.GetExtension(item).ToLower() == ".pdf")
+                            FileListT.Add(new Tuple<string>(item));
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex);
+                }
+
+
+            }
+            //Detect drag and drop from Outlook
+            else if (e.Data.GetDataPresent("FileGroupDescriptor"))
+            {
+
+                OutlookDataObject dataObject = new OutlookDataObject(e.Data);
+                string[] filenames = (string[])dataObject.GetData("FileGroupDescriptor");
+                MemoryStream[] filestreams = (MemoryStream[])dataObject.GetData("FileContents");
+
+                for (int fileIndex = 0; fileIndex < filenames.Length; fileIndex++)
+                {
+
+                    //use the fileindex to get the name and data stream
+                    string filename = Path.Combine(Helpers.TempDirectory + filenames[fileIndex]);
+                    MemoryStream filestream = filestreams[fileIndex];
+
+                    //save the file stream using its name to the application path
+                    FileStream outputStream = System.IO.File.Create(filename);
+                    filestream.WriteTo(outputStream);
+                    outputStream.Close();
+
+
+                    //Here u get multiple file names writen in tuple list if they are with .pdf extension
+                    if ( Path.GetExtension(filename).ToLower() == ".pdf" )
+                        FileListT.Add(new Tuple<string>(filename));
+                }
+            }
+            else
+            {
+                return;
+            }
+
+            // here we go thru tuple list with all files and add them to the listview, but first we check if we have any pdf file in the list
+
+            if (FileListT.Count() <= 0 )
+            {
+                MessageBoxForm msgbox = new MessageBoxForm()
+                {
+                    Caption = "Error: No PDF files",
+                    Message = "Error: For merging we accept only PDF files!"
+                };
+
+                msgbox.ShowDialog();
+                msgbox.Dispose();
+                return;
+            }
+            else
+            {
+                foreach (Tuple<string> FileFromList in FileListT)
+                {
+                    FilesListView.Items.Add(Path.GetFileName(FileFromList.Item1), FileFromList.Item1);
+                }
+            }
+          
+        }
+        private void MergePDF_DragLeave(object sender, EventArgs e)
+        {
+            //Return user control color to normal color
+            if (AmIStillInsideTheUserControl(this) == false)
+                this.BackColor = _defaultBackColor;
+        }
+        private void MergePDF_DragOver(object sender, DragEventArgs e)
+        {
+            //Change user control color so we know we are above target area for drag and drop
+            if (AmIStillInsideTheUserControl(this) == true)
+                this.BackColor = Color.LightBlue;
+        }
+        private void MergeFlatButton_Click(object sender, EventArgs e)
+        {
+
+            //ToDo: Create MaterialSkin SaveFileDialog
+            SaveFileDialog savePdfFileDialog = new SaveFileDialog()
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                Title = "PDF File for saving",
+                DefaultExt = "pdf",
+                Filter = "PDF files (*.pdf)|*.pdf",
+                CheckPathExists = true
+            };
+
+            if (savePdfFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string outputPdfFile = savePdfFileDialog.FileName;
+
+                PdfDocument outputPDFDocument = new PdfDocument();
+
+                foreach (ListViewItem item in FilesListView.Items)
+                {
+
+                    PdfDocument inputPDFDocument = PdfReader.Open(item.ImageKey, PdfDocumentOpenMode.Import);
+
+                    outputPDFDocument.Version = inputPDFDocument.Version;
+
+                    foreach (PdfPage page in inputPDFDocument.Pages)
+                    {
+                        outputPDFDocument.AddPage(page);
+                    }
+                }
+
+                outputPDFDocument.Save(outputPdfFile);
+            }
+
+
+        
+
+        }
     }
 }

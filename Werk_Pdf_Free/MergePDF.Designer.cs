@@ -1,4 +1,6 @@
-﻿namespace Werk_Pdf_Free
+﻿using Werk_Pdf_Free;
+
+namespace Werk_Pdf_Free
 {
     partial class MergePDF
     {
@@ -38,6 +40,7 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.LoadFilesFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.FileNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MergeFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.FilesListView = new MaterialListViewEx();
             this.NameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MergePdfContextMenuStrip.SuspendLayout();
@@ -55,11 +58,11 @@
             this.HeaderRectangleShape.Name = "HeaderRectangleShape";
             this.HeaderRectangleShape.Size = new System.Drawing.Size(720, 40);
             // 
-            // shapeContainer1
+            // HeaderBackContainer
             // 
             this.HeaderBackContainer.Location = new System.Drawing.Point(0, 0);
             this.HeaderBackContainer.Margin = new System.Windows.Forms.Padding(0);
-            this.HeaderBackContainer.Name = "shapeContainer1";
+            this.HeaderBackContainer.Name = "HeaderBackContainer";
             this.HeaderBackContainer.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.HeaderRectangleShape});
             this.HeaderBackContainer.Size = new System.Drawing.Size(720, 360);
@@ -76,9 +79,9 @@
             this.HeaderLabel.Location = new System.Drawing.Point(3, 11);
             this.HeaderLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.HeaderLabel.Name = "HeaderLabel";
-            this.HeaderLabel.Size = new System.Drawing.Size(115, 19);
+            this.HeaderLabel.Size = new System.Drawing.Size(328, 19);
             this.HeaderLabel.TabIndex = 40;
-            this.HeaderLabel.Text = "Merge PDF files";
+            this.HeaderLabel.Text = "Merge PDF files - other file types will be ignored";
             this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MergePdfContextMenuStrip
@@ -91,7 +94,7 @@
             this.pleaseLoadPDFFilesToolStripMenuItem});
             this.MergePdfContextMenuStrip.MouseState = MaterialSkin.MouseState.HOVER;
             this.MergePdfContextMenuStrip.Name = "MergePdfContextMenuStrip";
-            this.MergePdfContextMenuStrip.Size = new System.Drawing.Size(182, 92);
+            this.MergePdfContextMenuStrip.Size = new System.Drawing.Size(182, 70);
             this.MergePdfContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.MergePdfContextMenuStrip_Opening);
             // 
             // moveUpToolStripMenuItem
@@ -137,7 +140,7 @@
             this.LoadFilesFlatButton.Depth = 0;
             this.LoadFilesFlatButton.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoadFilesFlatButton.Icon = null;
-            this.LoadFilesFlatButton.Location = new System.Drawing.Point(397, 70);
+            this.LoadFilesFlatButton.Location = new System.Drawing.Point(530, 77);
             this.LoadFilesFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadFilesFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadFilesFlatButton.Name = "LoadFilesFlatButton";
@@ -153,8 +156,28 @@
             this.FileNameColumnHeader.Text = "File name";
             this.FileNameColumnHeader.Width = 241;
             // 
+            // MergeFlatButton
+            // 
+            this.MergeFlatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.MergeFlatButton.AutoSize = true;
+            this.MergeFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MergeFlatButton.Depth = 0;
+            this.MergeFlatButton.Icon = null;
+            this.MergeFlatButton.Location = new System.Drawing.Point(530, 313);
+            this.MergeFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.MergeFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.MergeFlatButton.Name = "MergeFlatButton";
+            this.MergeFlatButton.Primary = false;
+            this.MergeFlatButton.Size = new System.Drawing.Size(105, 36);
+            this.MergeFlatButton.TabIndex = 45;
+            this.MergeFlatButton.Text = "Merge Files";
+            this.MergeFlatButton.UseVisualStyleBackColor = true;
+            this.MergeFlatButton.Click += new System.EventHandler(this.MergeFlatButton_Click);
+            // 
             // FilesListView
             // 
+            this.FilesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.FilesListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FilesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameColumnHeader});
@@ -170,7 +193,7 @@
             this.FilesListView.MouseState = MaterialSkin.MouseState.OUT;
             this.FilesListView.Name = "FilesListView";
             this.FilesListView.OwnerDraw = true;
-            this.FilesListView.Size = new System.Drawing.Size(367, 272);
+            this.FilesListView.Size = new System.Drawing.Size(511, 272);
             this.FilesListView.TabIndex = 44;
             this.FilesListView.UseCompatibleStateImageBehavior = false;
             this.FilesListView.View = System.Windows.Forms.View.Details;
@@ -187,14 +210,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.FilesListView);
             this.Controls.Add(this.LoadFilesFlatButton);
+            this.Controls.Add(this.MergeFlatButton);
+            this.Controls.Add(this.FilesListView);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.HeaderLabel);
             this.Controls.Add(this.HeaderBackContainer);
             this.Name = "MergePDF";
             this.Size = new System.Drawing.Size(720, 360);
             this.Load += new System.EventHandler(this.MergePDF_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MergePDF_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MergePDF_DragEnter);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.MergePDF_DragOver);
+            this.DragLeave += new System.EventHandler(this.MergePDF_DragLeave);
             this.MergePdfContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -215,5 +243,6 @@
         private System.Windows.Forms.ColumnHeader FileNameColumnHeader;
         private MaterialListViewEx FilesListView;
         private System.Windows.Forms.ColumnHeader NameColumnHeader;
+        private MaterialSkin.Controls.MaterialFlatButton MergeFlatButton;
     }
 }
