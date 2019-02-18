@@ -1,7 +1,7 @@
 # werk-pdf-free
 App writen in C# and Visual Studio 2017 for splitting and merging PDF files with Material Design UI using PDFSharp/MigraDoc
 
-Application is using NuGet Packages log4net v2.0.8, MaterialSkin.Updated v0.2.2 and PDFSharp and MigraDoc v1.50.5147.
+Application is using NuGet Packages log4net v2.0.8, MaterialSkin.Updated v0.2.2 and PDFSharp and MigraDoc v1.50.5147, and VisualBasic Powerpack
 
 This is my first-time using GitHub and I hope everything is here...
 
