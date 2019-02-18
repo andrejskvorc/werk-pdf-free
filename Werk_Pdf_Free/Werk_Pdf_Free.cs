@@ -260,7 +260,7 @@ namespace Werk_Pdf_Free
 
             if (PdfSplitContainer.Panel2.Controls.Count <= 0)
             {
-              // AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+               AddControl(new ViewPdf() { _defaultBackColor = this.BackColor });
             }
             else
             {
@@ -268,18 +268,18 @@ namespace Werk_Pdf_Free
                 {
 
                     PdfSplitContainer.Panel2.Controls.Remove(control);
-                    //if (control.Name != "ViewPdf")
-                    //{
-                    //    control.Dispose();
-                    //    PdfSplitContainer.Panel2.Controls.Remove(control);
-                    //}
-                    //else
-                    //{
-                    //    return;
-                    //}
+                    if (control.Name != "ViewPdf")
+                    {
+                        control.Dispose();
+                        PdfSplitContainer.Panel2.Controls.Remove(control);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
 
-                //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+                AddControl(new ViewPdf() { _defaultBackColor = this.BackColor });
             }
         }
     }
