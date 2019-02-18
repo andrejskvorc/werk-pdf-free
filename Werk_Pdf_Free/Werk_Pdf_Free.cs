@@ -15,6 +15,8 @@ namespace Werk_Pdf_Free
 {
     public partial class Werk_Pdf_Free : MaterialForm
     {
+        private Point startLocation = new Point();
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
            IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -31,6 +33,7 @@ namespace Werk_Pdf_Free
         public Werk_Pdf_Free()
         {
             InitializeComponent();
+
 
             this.Icon = Properties.Resources.icons8_split_files_961;
 
@@ -58,6 +61,8 @@ namespace Werk_Pdf_Free
         private void Werk_Pdf_Free_Load(object sender, EventArgs e)
         {
 
+            startLocation = this.Location;
+            
             var _SplitPdf = new SplitPdf
             {
                 _defaultBackColor = this.BackColor,
@@ -77,7 +82,19 @@ namespace Werk_Pdf_Free
         private void SplitPdfControlFlatButton_Click(object sender, EventArgs e)
         {
 
+            this.SetDesktopLocation(startLocation.X, startLocation.Y);
 
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = 820,
+                Height = 420
+            };
+
+            this.Size = frmSize;
+
+            this.SizeGripStyle = SizeGripStyle.Hide;
+           
+                      
             if (PdfSplitContainer.Panel2.Controls.Count <= 0)
             {
                 AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
@@ -109,6 +126,18 @@ namespace Werk_Pdf_Free
 
         private void MergePdfFilesFlatButton_Click(object sender, EventArgs e)
         {
+            this.SetDesktopLocation(startLocation.X, startLocation.Y);
+
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = 820,
+                Height = 420
+            };
+
+            this.Size = frmSize;
+
+            this.SizeGripStyle = SizeGripStyle.Hide;
+
             if (PdfSplitContainer.Panel2.Controls.Count <= 0)
             {
                 AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
@@ -134,7 +163,124 @@ namespace Werk_Pdf_Free
 
         private void SettingsFlatButton_Click(object sender, EventArgs e)
         {
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = 820,
+                Height = 420
+            };
 
+            this.Size = frmSize;
+
+            this.SetDesktopLocation(startLocation.X, startLocation.Y);
+
+            this.SizeGripStyle = SizeGripStyle.Hide;
+
+            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            {
+                //AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+            }
+            else
+            {
+                foreach (Control control in PdfSplitContainer.Panel2.Controls)
+                {
+                    PdfSplitContainer.Panel2.Controls.Remove(control);
+                    //if (control.Name != "Settings")
+                    //{
+                    //    control.Dispose();
+                    //    PdfSplitContainer.Panel2.Controls.Remove(control);
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
+                }
+
+              //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+            }
+
+        }
+
+        private void ManualSplitFlatButton_Click(object sender, EventArgs e)
+        {
+            Screen myScreen = Screen.FromControl(this);
+            Rectangle area = myScreen.WorkingArea;
+
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = area.Width-200,
+                Height = area.Height-100
+            };
+
+            this.Size = frmSize;
+            
+            this.SizeGripStyle = SizeGripStyle.Show;
+
+            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            {
+                //AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+            }
+            else
+            {
+                foreach (Control control in PdfSplitContainer.Panel2.Controls)
+                {
+                    PdfSplitContainer.Panel2.Controls.Remove(control);
+
+                    //if (control.Name != "ManualSplit")
+                    //{
+                    //    control.Dispose();
+                    //    PdfSplitContainer.Panel2.Controls.Remove(control);
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
+                }
+
+                //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+            }
+
+        }
+
+        private void ViewPdfFlatButton_Click(object sender, EventArgs e)
+        {
+            Screen myScreen = Screen.FromControl(this);
+            Rectangle area = myScreen.WorkingArea;
+
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = area.Width - 200,
+                Height = area.Height - 100
+            };
+
+            this.SetDesktopLocation(100, 20);
+
+            this.Size = frmSize;
+
+            this.SizeGripStyle = SizeGripStyle.Show;
+
+            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            {
+              // AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+            }
+            else
+            {
+                foreach (Control control in PdfSplitContainer.Panel2.Controls)
+                {
+
+                    PdfSplitContainer.Panel2.Controls.Remove(control);
+                    //if (control.Name != "ViewPdf")
+                    //{
+                    //    control.Dispose();
+                    //    PdfSplitContainer.Panel2.Controls.Remove(control);
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
+                }
+
+                //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+            }
         }
     }
 }

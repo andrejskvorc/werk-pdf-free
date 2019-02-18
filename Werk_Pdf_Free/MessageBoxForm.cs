@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;

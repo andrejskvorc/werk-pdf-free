@@ -34,6 +34,8 @@
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.ExitFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.SettingsFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
+            this.ManualSplitFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
+            this.ViewPdfFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.PdfSplitContainer)).BeginInit();
             this.PdfSplitContainer.Panel1.SuspendLayout();
             this.PdfSplitContainer.SuspendLayout();
@@ -60,14 +62,18 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.SettingsFlatButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.MergePdfFilesFlatButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.materialFlatButton1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ExitFlatButton, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.ExitFlatButton, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.SettingsFlatButton, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ViewPdfFlatButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ManualSplitFlatButton, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -116,7 +122,7 @@
             this.ExitFlatButton.AutoSize = true;
             this.ExitFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ExitFlatButton.Depth = 0;
-            this.ExitFlatButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ExitFlatButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.ExitFlatButton.Icon = null;
             this.ExitFlatButton.Location = new System.Drawing.Point(4, 388);
             this.ExitFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -147,6 +153,43 @@
             this.SettingsFlatButton.UseVisualStyleBackColor = true;
             this.SettingsFlatButton.Click += new System.EventHandler(this.SettingsFlatButton_Click);
             // 
+            // ManualSplitFlatButton
+            // 
+            this.ManualSplitFlatButton.AutoSize = true;
+            this.ManualSplitFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ManualSplitFlatButton.Depth = 0;
+            this.ManualSplitFlatButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ManualSplitFlatButton.Icon = null;
+            this.ManualSplitFlatButton.Location = new System.Drawing.Point(4, 78);
+            this.ManualSplitFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ManualSplitFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ManualSplitFlatButton.Name = "ManualSplitFlatButton";
+            this.ManualSplitFlatButton.Primary = false;
+            this.ManualSplitFlatButton.Size = new System.Drawing.Size(129, 24);
+            this.ManualSplitFlatButton.TabIndex = 1;
+            this.ManualSplitFlatButton.Text = "Manual split";
+            this.ManualSplitFlatButton.UseVisualStyleBackColor = true;
+            this.ManualSplitFlatButton.Visible = false;
+            this.ManualSplitFlatButton.Click += new System.EventHandler(this.ManualSplitFlatButton_Click);
+            // 
+            // ViewPdfFlatButton
+            // 
+            this.ViewPdfFlatButton.AutoSize = true;
+            this.ViewPdfFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ViewPdfFlatButton.Depth = 0;
+            this.ViewPdfFlatButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ViewPdfFlatButton.Icon = null;
+            this.ViewPdfFlatButton.Location = new System.Drawing.Point(4, 114);
+            this.ViewPdfFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ViewPdfFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ViewPdfFlatButton.Name = "ViewPdfFlatButton";
+            this.ViewPdfFlatButton.Primary = false;
+            this.ViewPdfFlatButton.Size = new System.Drawing.Size(129, 24);
+            this.ViewPdfFlatButton.TabIndex = 2;
+            this.ViewPdfFlatButton.Text = "View PDF";
+            this.ViewPdfFlatButton.UseVisualStyleBackColor = true;
+            this.ViewPdfFlatButton.Click += new System.EventHandler(this.ViewPdfFlatButton_Click);
+            // 
             // Werk_Pdf_Free
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,5 +218,7 @@
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
         private MaterialSkin.Controls.MaterialFlatButton MergePdfFilesFlatButton;
         private MaterialSkin.Controls.MaterialFlatButton SettingsFlatButton;
+        private MaterialSkin.Controls.MaterialFlatButton ManualSplitFlatButton;
+        private MaterialSkin.Controls.MaterialFlatButton ViewPdfFlatButton;
     }
 }
