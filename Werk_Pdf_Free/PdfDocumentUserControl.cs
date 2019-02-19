@@ -31,11 +31,11 @@ namespace Werk_Pdf_Free
         Font RobotoRegulatFont9;
         Font RobotoRegulatFont825;
 
+        private bool ShowBookmarks { get; set; } = false;
+
         private string inputFileName = null;
 
-        private string outputFileName = null;
-
-       
+        private SearchForm _searchForm;
 
         public Color _defaultBackColor { get; set; }
         private void RegularFonts()
@@ -66,7 +66,7 @@ namespace Werk_Pdf_Free
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
             RobotoBoldFont12 = new Font(fonts.Families[0], 12.0F);
-           
+
         }
         public PdfDocumentUserControl()
         {
@@ -76,18 +76,81 @@ namespace Werk_Pdf_Free
             RegularFonts();
             BoldFonts();
 
-            var materialSkinManager = MaterialSkinManager.Instance; 
+            var materialSkinManager = MaterialSkinManager.Instance;
 
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
+     
+            pdfViewer.Renderer.DisplayRectangleChanged += Renderer_DisplayRectangleChanged;
+            pdfViewer.Renderer.ZoomChanged += Renderer_ZoomChanged;
+
+            pdfViewer.Renderer.MouseMove += Renderer_MouseMove;
+            pdfViewer.Renderer.MouseLeave += Renderer_MouseLeave;
+            ShowPdfLocation(PdfPoint.Empty);
+
+         //   cutMarginsWhenPrintingToolStripMenuItem.PerformClick();
+
+            ZoomSingleLineTextField.Text = pdfViewer.Renderer.Zoom.ToString();
+
+            Disposed += (s, e) => pdfViewer.Document?.Dispose();
 
         }
+
+        private void Renderer_MouseLeave(object sender, EventArgs e)
+        {
+            ShowPdfLocation(PdfPoint.Empty);
+        }
+
+        private void Renderer_MouseMove(object sender, MouseEventArgs e)
+        {
+            ShowPdfLocation(pdfViewer.Renderer.PointToPdf(e.Location));
+        }
+
+        private void ShowPdfLocation(PdfPoint point)
+        {
+            if (!point.IsValid)
+            {
+               // _pageToolStripLabel.Text = null;
+               // _coordinatesToolStripLabel.Text = null;
+            }
+            else
+            {
+             //   _pageToolStripLabel.Text = (point.Page + 1).ToString();
+             //   _coordinatesToolStripLabel.Text = point.Location.X + "," + point.Location.Y;
+            }
+        }
+
+        void Renderer_ZoomChanged(object sender, EventArgs e)
+        {
+            ZoomSingleLineTextField.Text = pdfViewer.Renderer.Zoom.ToString();
+        }
+
+        void Renderer_DisplayRectangleChanged(object sender, EventArgs e)
+        {
+            PageSingleLineTextField.Text = (pdfViewer.Renderer.Page + 1).ToString();
+        }
+
+        private void Rotate(PdfRotation rotate)
+        {
+            // PdfRenderer does not support changes to the loaded document,
+            // so we fake it by reloading the document into the renderer.
+
+            int page = pdfViewer.Renderer.Page;
+            var document = pdfViewer.Document;
+            pdfViewer.Document = null;
+            document.RotatePage(page, rotate);
+            pdfViewer.Document = document;
+            pdfViewer.Renderer.Page = page;
+        }
+
         private void PdfDocumentUserControl_Load(object sender, EventArgs e)
         {
+
+
             BackColor = _defaultBackColor;
         }
-        
+
         private void PdfDocumentUserControl_DragDrop(object sender, DragEventArgs e)
         {
             this.BackColor = _defaultBackColor;
@@ -190,13 +253,12 @@ namespace Werk_Pdf_Free
 
                             pdfViewer.Document = OpenDocument(inputFileName);
 
-                            PdfDocument document = OpenDocument(inputFileName);
+                            pdfViewer.ShowBookmarks = ShowBookmarks;
 
-                            int count = document.PageCount;
+                            ZoomSingleLineTextField.Text = "1,5";
 
-                            
-                         
-
+                            if (float.TryParse(ZoomSingleLineTextField.Text, out float zoom))
+                                pdfViewer.Renderer.Zoom = zoom;
 
                             break;
 
@@ -274,5 +336,212 @@ namespace Werk_Pdf_Free
         {
             CloseFile();
         }
+
+        private void SearchSingleLineTextField_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void SearchFlatButton_Click(object sender, EventArgs e)
+        {
+            if (_searchForm == null)
+            {
+                _searchForm = new SearchForm(pdfViewer.Renderer);
+                _searchForm.Disposed += (s, ea) => _searchForm = null;
+                _searchForm.Show(this);
+            }
+
+            _searchForm.Focus();
+        }
+
+        private void OpenPdfFlatButton_Click(object sender, EventArgs e)
+        {
+            OpenPdfFile();
+        }
+
+        private void PageSingleLineTextField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+
+                if (int.TryParse(PageSingleLineTextField.Text, out int page))
+                    pdfViewer.Renderer.Page = page - 1;
+            }
+        }
+
+        private void PrevFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.Page--;
+        }
+
+        private void NextFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.Page++;
+        }
+
+        private void ZoomSingleLineTextField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+
+                if (float.TryParse(ZoomSingleLineTextField.Text, out float zoom))
+                    pdfViewer.Renderer.Zoom = zoom;
+            }
+        }
+
+        private void ZoomInFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.ZoomIn();
+        }
+
+        private void ZoomOutFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.ZoomOut();
+        }
+
+        private void FitPage(PdfViewerZoomMode zoomMode)
+        {
+            int page = pdfViewer.Renderer.Page;
+            pdfViewer.ZoomMode = zoomMode;
+            pdfViewer.Renderer.Zoom = 1;
+            pdfViewer.Renderer.Page = page;
+        }
+
+        private void FitWidthFlatButton_Click(object sender, EventArgs e)
+        {
+            FitPage(PdfViewerZoomMode.FitWidth);
+        }
+
+        private void FitHeightFlatButton_Click(object sender, EventArgs e)
+        {
+            FitPage(PdfViewerZoomMode.FitHeight);
+        }
+
+        private void FitBestFlatButton_Click(object sender, EventArgs e)
+        {
+            ZoomSingleLineTextField.Text = "1,5";
+
+            if (float.TryParse(ZoomSingleLineTextField.Text, out float zoom))
+                pdfViewer.Renderer.Zoom = zoom;
+        }
+
+        private void RotateLeftFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.RotateLeft();
+        }
+
+        private void RotateRightFlatButton_Click(object sender, EventArgs e)
+        {
+            pdfViewer.Renderer.RotateRight();
+        }
+
+        private void BookmarksFlatButton_Click(object sender, EventArgs e)
+        {
+
+            switch (ShowBookmarks)
+            {
+                case true:
+                    ShowBookmarks = false;
+                    pdfViewer.ShowBookmarks = ShowBookmarks;
+                    break;
+                case false:
+                    ShowBookmarks = true;
+                    pdfViewer.ShowBookmarks = ShowBookmarks;
+                    break;
+            }
+
+        
+        }
+
+        private void OpenPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPdfFile();
+        }
+
+        private void OpenPdfFile()
+        {
+            using (var form = new OpenFileDialog())
+            {
+                form.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
+                form.RestoreDirectory = true;
+                form.Title = "Open PDF File";
+
+                if (form.ShowDialog(this) != DialogResult.OK)
+                {
+                    form.Dispose();
+                    return;
+                }
+
+                inputFileName = form.FileName;
+
+                pdfViewer.Document?.Dispose();
+                pdfViewer.Document = OpenDocument(form.FileName);
+
+                pdfViewer.ShowBookmarks = ShowBookmarks;
+
+                ZoomSingleLineTextField.Text = "1,5";
+
+                if (float.TryParse(ZoomSingleLineTextField.Text, out float zoom))
+                    pdfViewer.Renderer.Zoom = zoom;
+
+
+
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavePdfFile();
+        }
+
+        private void SavePdfFile()
+        {
+
+            if (pdfViewer.Document != null)
+            {
+                using (var form = new SaveFileDialog())
+                {
+                    form.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
+                    form.RestoreDirectory = true;
+                    form.Title = "Open PDF File";
+                    form.FileName = Path.GetFileName(inputFileName);
+
+
+                    if (form.ShowDialog(this) != DialogResult.OK)
+                    {
+
+                        pdfViewer.Document.Save(form.FileName);
+                        form.Dispose();
+                        return;
+                    }
+                }
+            }
+           
+        }
+
+        private void SaveFlatButton_Click(object sender, EventArgs e)
+        {
+            SavePdfFile();
+        }
+
+        private void PrintFlatButton_Click(object sender, EventArgs e)
+        {
+            PrintPdfFile();
+        }
+
+        private void PrintPdfFile()
+        {
+            if (pdfViewer.Document != null)
+            {
+                using (var form = new PrintPreviewDialog())
+                {
+                    form.Document = pdfViewer.Document.CreatePrintDocument(pdfViewer.DefaultPrintMode);
+                    form.ShowDialog(this);
+                }
+            }
+        }
     }
+    
 }

@@ -39,8 +39,6 @@ namespace Werk_Pdf_Free
 
         private string inputFileName = null;
 
-        private string outputFileName = null;
-
         public Color _defaultBackColor { get; set; }
         private void RegularFonts()
         {
@@ -89,6 +87,9 @@ namespace Werk_Pdf_Free
         }
         private void ViewPdf_Load(object sender, EventArgs e)
         {
+
+            //ToDo: Add tabs so we can have multiple PDF-s open
+
             BackColor = _defaultBackColor;
 
             HeaderLabel.Font = RobotoBoldFont12;
@@ -100,7 +101,7 @@ namespace Werk_Pdf_Free
             };
 
 
-            NoneTabePage.Controls.Add(viewPdfDoc);
+            panel.Controls.Add(viewPdfDoc);
 
 
         }

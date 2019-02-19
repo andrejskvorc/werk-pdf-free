@@ -90,6 +90,8 @@ namespace Werk_Pdf_Free
                 Height = 420
             };
 
+            this.MinimumSize = frmSize;
+
             this.Size = frmSize;
 
             this.SizeGripStyle = SizeGripStyle.Hide;
@@ -134,6 +136,8 @@ namespace Werk_Pdf_Free
                 Height = 420
             };
 
+            this.MinimumSize = frmSize;
+
             this.Size = frmSize;
 
             this.SizeGripStyle = SizeGripStyle.Hide;
@@ -169,6 +173,7 @@ namespace Werk_Pdf_Free
                 Height = 420
             };
 
+            this.MinimumSize = frmSize;
             this.Size = frmSize;
 
             this.SetDesktopLocation(startLocation.X, startLocation.Y);
@@ -248,11 +253,18 @@ namespace Werk_Pdf_Free
 
             System.Drawing.Size frmSize = new System.Drawing.Size
             {
-                Width = area.Width - 200,
-                Height = area.Height - 100
+                Width = 900+140,
+                Height = 700
             };
 
-            this.SetDesktopLocation(100, 20);
+      
+
+            int centerW = area.Width / 2;
+            int centerH = area.Height / 2;
+
+            this.SetDesktopLocation(centerW - frmSize.Width/2, centerH - 350);
+
+            this.MinimumSize = frmSize;
 
             this.Size = frmSize;
 
