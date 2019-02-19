@@ -13,5 +13,7 @@ Spliting, Merging PDF files is finished, as is Viewing one at the time. Now just
 
 Hope I will create two installation types, one for Click Once Deployment and one with classic installer
 
+Icones used are from https://icons8.com
+
 ![Alt text](https://github.com/andrejskvorc/werk-pdf-free/blob/master/Screenshots/WerkPdfFree.PNG?raw=true "Screenshot")
 
