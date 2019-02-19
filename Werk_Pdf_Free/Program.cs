@@ -6,12 +6,16 @@ namespace Werk_Pdf_Free
 {
     static class Program
     {
+        private const string UniqeAppIdentity = "{91edb993-b7e3-4c7e-821e-754ee4d7b12c}";
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
