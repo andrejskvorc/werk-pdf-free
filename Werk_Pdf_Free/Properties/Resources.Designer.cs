@@ -191,16 +191,6 @@ namespace Werk_Pdf_Free.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon icons8_split_files_961 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_split_files_961", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap icons8_view_48 {
@@ -227,6 +217,21 @@ namespace Werk_Pdf_Free.Properties {
             get {
                 object obj = ResourceManager.GetObject("icons8_zoom_out_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Components used in WerkPDF free and their licences:
+        ///- log4net - https://logging.apache.org/log4net/ - Apache License, Version 2.0
+        ///- PdfiumViewer - https://github.com/pvginkel/PdfiumViewer - Apache License, Version 2.0
+        ///- Roboto font (embeded in app)- https://github.com/google/roboto/ - Apache License, Version 2.0
+        ///- MaterialSkin.Updated - https://github.com/IgnaceMaes/MaterialSkin - The MIT License (MIT)
+        ///- PDFSharp and MigraDoc - http://www.pdfsharp.net/ - The MIT License (MIT)
+        ///- Pdfium - https://pdfium.googl [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Licence {
+            get {
+                return ResourceManager.GetString("Licence", resourceCulture);
             }
         }
         
@@ -347,6 +352,36 @@ namespace Werk_Pdf_Free.Properties {
             get {
                 object obj = ResourceManager.GetObject("Roboto_ThinItalic", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon WerkPDF {
+            get {
+                object obj = ResourceManager.GetObject("WerkPDF", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WerkPDF48 {
+            get {
+                object obj = ResourceManager.GetObject("WerkPDF48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WerkPDF96 {
+            get {
+                object obj = ResourceManager.GetObject("WerkPDF96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

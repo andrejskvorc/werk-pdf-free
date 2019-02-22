@@ -35,7 +35,7 @@ namespace Werk_Pdf_Free
             InitializeComponent();
 
 
-            this.Icon = Properties.Resources.icons8_split_files_961;
+            this.Icon = Properties.Resources.WerkPDF;
 
             byte[] fontData = Properties.Resources.Roboto_Regular;
             IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
@@ -144,7 +144,7 @@ namespace Werk_Pdf_Free
 
             if (PdfSplitContainer.Panel2.Controls.Count <= 0)
             {
-                AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+                AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
             }
             else
             {
@@ -292,6 +292,45 @@ namespace Werk_Pdf_Free
                 }
 
                 AddControl(new ViewPdf() { _defaultBackColor = this.BackColor });
+            }
+        }
+
+        private void AboutAndLicenceFlatButton_Click(object sender, EventArgs e)
+        {
+            this.SetDesktopLocation(startLocation.X, startLocation.Y);
+
+            System.Drawing.Size frmSize = new System.Drawing.Size
+            {
+                Width = 820,
+                Height = 420
+            };
+
+            this.MinimumSize = frmSize;
+
+            this.Size = frmSize;
+
+            this.SizeGripStyle = SizeGripStyle.Hide;
+
+            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            {
+                AddControl(new AboutAndLicenceView() { _defaultBackColor = this.BackColor });
+            }
+            else
+            {
+                foreach (Control control in PdfSplitContainer.Panel2.Controls)
+                {
+                    if (control.Name != "AboutAndLicenceView")
+                    {
+                        control.Dispose();
+                        PdfSplitContainer.Panel2.Controls.Remove(control);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                AddControl(new AboutAndLicenceView() { _defaultBackColor = this.BackColor });
             }
         }
     }

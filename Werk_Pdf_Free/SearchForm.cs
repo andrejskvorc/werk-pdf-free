@@ -37,7 +37,7 @@ namespace Werk_Pdf_Free
         {
             InitializeComponent();
 
-            this.Icon = Properties.Resources.icons8_split_files_961;
+            this.Icon = Properties.Resources.WerkPDF;
 
             byte[] fontData = Properties.Resources.Roboto_Regular;
             IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);

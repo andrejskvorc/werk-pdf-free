@@ -45,6 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,7 +60,7 @@
     <StartupObject>Werk_Pdf_Free.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\icons8-split-files-96.ico</ApplicationIcon>
+    <ApplicationIcon>WerkPDF.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -132,6 +133,12 @@
     <Compile Include="PdfDocumentUserControl.Designer.cs">
       <DependentUpon>PdfDocumentUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="AboutAndLicenceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AboutAndLicenceView.Designer.cs">
+      <DependentUpon>AboutAndLicenceView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewPdf.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,6 +178,9 @@
     </Compile>
     <EmbeddedResource Include="PdfDocumentUserControl.resx">
       <DependentUpon>PdfDocumentUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutAndLicenceView.resx">
+      <DependentUpon>AboutAndLicenceView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewPdf.resx">
       <DependentUpon>ViewPdf.cs</DependentUpon>
@@ -278,6 +288,21 @@
       <Progid>91edb993-b7e3-4c7e-821e-754ee4d7b12c</Progid>
       <DefaultIcon>Resources\icons8-split-files-96.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WerkPDF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WerkPDF.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WerkPDF48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WerkPDF96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WerkPDF.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
