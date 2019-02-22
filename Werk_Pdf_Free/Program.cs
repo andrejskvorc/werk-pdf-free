@@ -16,6 +16,7 @@ namespace Werk_Pdf_Free
         static void Main()
         {
 
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
