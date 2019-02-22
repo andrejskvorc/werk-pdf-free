@@ -37,6 +37,7 @@
             this.ViewPdfFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.ManualSplitFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.AboutAndLicenceFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
+            this.DownloadNewFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.PdfSplitContainer)).BeginInit();
             this.PdfSplitContainer.Panel1.SuspendLayout();
             this.PdfSplitContainer.SuspendLayout();
@@ -211,11 +212,31 @@
             this.AboutAndLicenceFlatButton.UseVisualStyleBackColor = true;
             this.AboutAndLicenceFlatButton.Click += new System.EventHandler(this.AboutAndLicenceFlatButton_Click);
             // 
+            // DownloadNewFlatButton
+            // 
+            this.DownloadNewFlatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DownloadNewFlatButton.AutoSize = true;
+            this.DownloadNewFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.DownloadNewFlatButton.Depth = 0;
+            this.DownloadNewFlatButton.Icon = null;
+            this.DownloadNewFlatButton.Location = new System.Drawing.Point(546, 26);
+            this.DownloadNewFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.DownloadNewFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.DownloadNewFlatButton.Name = "DownloadNewFlatButton";
+            this.DownloadNewFlatButton.Primary = false;
+            this.DownloadNewFlatButton.Size = new System.Drawing.Size(272, 36);
+            this.DownloadNewFlatButton.TabIndex = 1;
+            this.DownloadNewFlatButton.Text = "New version available - download";
+            this.DownloadNewFlatButton.UseVisualStyleBackColor = true;
+            this.DownloadNewFlatButton.Visible = false;
+            this.DownloadNewFlatButton.Click += new System.EventHandler(this.DownloadNewFlatButton_Click);
+            // 
             // Werk_Pdf_Free
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 480);
+            this.Controls.Add(this.DownloadNewFlatButton);
             this.Controls.Add(this.PdfSplitContainer);
             this.MaximizeBox = false;
             this.Name = "Werk_Pdf_Free";
@@ -228,6 +249,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -242,5 +264,6 @@
         private MaterialSkin.Controls.MaterialFlatButton ManualSplitFlatButton;
         private MaterialSkin.Controls.MaterialFlatButton ViewPdfFlatButton;
         private MaterialSkin.Controls.MaterialFlatButton AboutAndLicenceFlatButton;
+        private MaterialSkin.Controls.MaterialFlatButton DownloadNewFlatButton;
     }
 }

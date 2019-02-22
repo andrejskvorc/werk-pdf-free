@@ -17,10 +17,10 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\andrej.skvorc\source\repos\Werk_Pdf_Free\CompiledApp\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -31,9 +31,10 @@
     <PublisherName>PulsarWerks</PublisherName>
     <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.1.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,14 +56,33 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Werk_Pdf_Free.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>WerkPDF.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\WerkPDF.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>254EC871F9D85106C2A594870E0210136D1339F6</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Werk_Pdf_Free_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
+    <Reference Include="FileDownloader, Version=1.0.6757.29620, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Avira.FileDownloader.1.0.0\lib\net35\FileDownloader.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -80,6 +100,9 @@
     <Reference Include="MigraDoc.RtfRendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.RtfRendering-gdi.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
       <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
     </Reference>
@@ -88,6 +111,9 @@
     </Reference>
     <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="Syroot.KnownFolders, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syroot.Windows.IO.KnownFolders.1.2.1\lib\net452\Syroot.KnownFolders.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -139,6 +165,7 @@
     <Compile Include="AboutAndLicenceView.Designer.cs">
       <DependentUpon>AboutAndLicenceView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateCheck.cs" />
     <Compile Include="ViewPdf.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +241,7 @@
     <EmbeddedResource Include="Resources\Roboto-Regular.ttf" />
     <EmbeddedResource Include="Resources\Roboto-Thin.ttf" />
     <EmbeddedResource Include="Resources\Roboto-ThinItalic.ttf" />
+    <None Include="Werk_Pdf_Free_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -232,12 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-close-window-48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-split-files-96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-split-files-96.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-view-48.png" />
@@ -303,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WerkPDF.ico" />
+    <Content Include="Werk_Pdf_Free.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

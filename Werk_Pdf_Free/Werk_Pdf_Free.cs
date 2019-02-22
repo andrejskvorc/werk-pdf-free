@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Threading;
 
 namespace Werk_Pdf_Free
 {
     public partial class Werk_Pdf_Free : MaterialForm
     {
+
+        System.Threading.Timer GetUpdateCheck;
+     
         private Point startLocation = new Point();
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
@@ -58,8 +62,15 @@ namespace Werk_Pdf_Free
 
         }
 
+
         private void Werk_Pdf_Free_Load(object sender, EventArgs e)
         {
+
+            GetUpdateCheck = new System.Threading.Timer(
+              t =>  UpdateCheck.Start(DownloadNewFlatButton),
+              null,
+              TimeSpan.Zero,
+              TimeSpan.FromMinutes(5));
 
             startLocation = this.Location;
             
@@ -167,41 +178,43 @@ namespace Werk_Pdf_Free
 
         private void SettingsFlatButton_Click(object sender, EventArgs e)
         {
-            System.Drawing.Size frmSize = new System.Drawing.Size
-            {
-                Width = 820,
-                Height = 420
-            };
 
-            this.MinimumSize = frmSize;
-            this.Size = frmSize;
 
-            this.SetDesktopLocation(startLocation.X, startLocation.Y);
+            //System.Drawing.Size frmSize = new System.Drawing.Size
+            //{
+            //    Width = 820,
+            //    Height = 420
+            //};
 
-            this.SizeGripStyle = SizeGripStyle.Hide;
+            //this.MinimumSize = frmSize;
+            //this.Size = frmSize;
 
-            if (PdfSplitContainer.Panel2.Controls.Count <= 0)
-            {
-                //AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
-            }
-            else
-            {
-                foreach (Control control in PdfSplitContainer.Panel2.Controls)
-                {
-                    PdfSplitContainer.Panel2.Controls.Remove(control);
-                    //if (control.Name != "Settings")
-                    //{
-                    //    control.Dispose();
-                    //    PdfSplitContainer.Panel2.Controls.Remove(control);
-                    //}
-                    //else
-                    //{
-                    //    return;
-                    //}
-                }
+            //this.SetDesktopLocation(startLocation.X, startLocation.Y);
 
-              //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
-            }
+            //this.SizeGripStyle = SizeGripStyle.Hide;
+
+            //if (PdfSplitContainer.Panel2.Controls.Count <= 0)
+            //{
+            //    //AddControl(new SplitPdf() { _defaultBackColor = this.BackColor });
+            //}
+            //else
+            //{
+            //    foreach (Control control in PdfSplitContainer.Panel2.Controls)
+            //    {
+            //        PdfSplitContainer.Panel2.Controls.Remove(control);
+            //        //if (control.Name != "Settings")
+            //        //{
+            //        //    control.Dispose();
+            //        //    PdfSplitContainer.Panel2.Controls.Remove(control);
+            //        //}
+            //        //else
+            //        //{
+            //        //    return;
+            //        //}
+            //    }
+
+            //  //  AddControl(new MergePDF() { _defaultBackColor = this.BackColor });
+            //}
 
         }
 
@@ -248,8 +261,10 @@ namespace Werk_Pdf_Free
 
         private void ViewPdfFlatButton_Click(object sender, EventArgs e)
         {
+            
             Screen myScreen = Screen.FromControl(this);
-            Rectangle area = myScreen.WorkingArea;
+
+           Rectangle area = myScreen.WorkingArea;
 
             System.Drawing.Size frmSize = new System.Drawing.Size
             {
@@ -257,9 +272,8 @@ namespace Werk_Pdf_Free
                 Height = 700
             };
 
-      
-
             int centerW = area.Width / 2;
+
             int centerH = area.Height / 2;
 
             this.SetDesktopLocation(centerW - frmSize.Width/2, centerH - 350);
@@ -332,6 +346,11 @@ namespace Werk_Pdf_Free
 
                 AddControl(new AboutAndLicenceView() { _defaultBackColor = this.BackColor });
             }
+        }
+
+        private void DownloadNewFlatButton_Click(object sender, EventArgs e)
+        {
+            UpdateCheck.StartUpdate();
         }
     }
 }
